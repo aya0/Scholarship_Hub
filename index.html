@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Palestine Scholarship Hub</title>
+  <meta name="description" content="Fully funded scholarships for Palestinian students — powered by live APIs." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══ NAVBAR ══════════════════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="logo">
+        <div class="pal-flag">
+          <span class="f-black"></span>
+          <span class="f-white"></span>
+          <span class="f-green"></span>
+          <div class="f-triangle"></div>
+        </div>
+        <span>Palestine Scholarship Hub</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#scholarships">Scholarships</a></li>
+        <li><a href="#sources">Data Sources</a></li>
+        <li><a href="#roadmap">Roadmap</a></li>
+        <li><a href="#advisor">AI Advisor</a></li>
+      </ul>
+      <button class="btn-nav-cta" onclick="document.getElementById('scholarships').scrollIntoView({behavior:'smooth'})">
+        Start Applying ↗
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#scholarships">Scholarships</a>
+      <a href="#sources">Data Sources</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#advisor">AI Advisor</a>
+    </div>
+  </nav>
+
+  <!-- ══ HERO ════════════════════════════════════════════════════════ -->
+  <section class="hero" id="home">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-glow"></div>
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <div class="badge animate-in" style="animation-delay:.05s">
+          <span class="badge-dot"></span> Live Data — Updated 2025–2026
+        </div>
+        <h1 class="hero-title animate-in" style="animation-delay:.15s">
+          Scholarships for<br /><em>Palestinian Students</em>
+        </h1>
+        <p class="hero-desc animate-in" style="animation-delay:.25s">
+          Real-time scholarship data from Data Palestine, OpenData.ps & Apify.
+          Find fully funded opportunities in Europe and beyond — no IELTS required for many programs.
+        </p>
+        <div class="hero-actions animate-in" style="animation-delay:.35s">
+          <button class="btn-primary" onclick="document.getElementById('scholarships').scrollIntoView({behavior:'smooth'})">
+            Browse Live Data
+          </button>
+          <button class="btn-outline" onclick="document.getElementById('advisor').scrollIntoView({behavior:'smooth'})">
+            Ask AI Advisor
+          </button>
+        </div>
+      </div>
+      <div class="hero-stats animate-in" style="animation-delay:.45s">
+        <div class="stat-card">
+          <div class="stat-val" id="statTotal">—</div>
+          <div class="stat-label">Scholarships Found</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">3</div>
+          <div class="stat-label">Live API Sources</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">20+</div>
+          <div class="stat-label">Countries</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">Free</div>
+          <div class="stat-label">Always</div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint">scroll ↓</div>
+  </section>
+
+  <!-- ══ DATA SOURCES STATUS ═════════════════════════════════════════ -->
+  <section class="sources-section" id="sources">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-label">Live API Status</div>
+        <h2 class="section-title">Connected Data Sources</h2>
+        <p class="section-desc">Real-time connection status for each data source powering this hub.</p>
+      </div>
+      <div class="sources-grid">
+
+        <div class="source-card" id="src-dataps">
+          <div class="source-top">
+            <div class="source-icon">🗄️</div>
+            <div class="source-status" id="status-dataps">
+              <span class="status-dot checking"></span> Checking…
+            </div>
+          </div>
+          <h3 class="source-name">Data Palestine</h3>
+          <p class="source-url">data.palestine.ps</p>
+          <p class="source-desc">Primary education & scholarship dataset curated for Palestinian students. Covers local and international opportunities.</p>
+          <div class="source-meta">
+            <span class="meta-chip">Education</span>
+            <span class="meta-chip">Scholarships</span>
+            <span class="meta-chip">Palestine</span>
+          </div>
+          <a href="https://data.palestine.ps" target="_blank" class="source-link">Visit API ↗</a>
+        </div>
+
+        <div class="source-card" id="src-opendata">
+          <div class="source-top">
+            <div class="source-icon">📡</div>
+            <div class="source-status" id="status-opendata">
+              <span class="status-dot checking"></span> Checking…
+            </div>
+          </div>
+          <h3 class="source-name">OpenData.ps</h3>
+          <p class="source-url">opendata.ps</p>
+          <p class="source-desc">Palestine's national open data portal using CKAN. Provides structured datasets on education, development, and social services.</p>
+          <div class="source-meta">
+            <span class="meta-chip">CKAN API</span>
+            <span class="meta-chip">Open Data</span>
+            <span class="meta-chip">JSON</span>
+          </div>
+          <a href="https://www.opendata.ps" target="_blank" class="source-link">Visit API ↗</a>
+        </div>
+
+        <div class="source-card" id="src-apify">
+          <div class="source-top">
+            <div class="source-icon">🤖</div>
+            <div class="source-status" id="status-apify">
+              <span class="status-dot checking"></span> Checking…
+            </div>
+          </div>
+          <h3 class="source-name">Apify Scraper</h3>
+          <p class="source-url">api.apify.com</p>
+          <p class="source-desc">Automated scholarship scraper that extracts live data from HESPAL, DAAD, Erasmus Mundus, and other scholarship portals.</p>
+          <div class="source-meta">
+            <span class="meta-chip">Web Scraping</span>
+            <span class="meta-chip">Actor API</span>
+            <span class="meta-chip">Live</span>
+          </div>
+          <a href="https://apify.com/store" target="_blank" class="source-link">Visit API ↗</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SEARCH & FILTER ═════════════════════════════════════════════ -->
+  <section class="search-section" id="scholarships">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-label">Find Opportunities</div>
+        <h2 class="section-title">Search Scholarships</h2>
+      </div>
+      <div class="search-panel">
+        <div class="search-row">
+          <div class="input-wrap">
+            <span class="input-icon">🔍</span>
+            <input type="text" id="searchInput" class="search-input" placeholder="Search by name, field, or country…" />
+          </div>
+          <select id="countryFilter" class="filter-select">
+            <option value="">All Countries</option>
+            <option>United Kingdom</option>
+            <option>Germany</option>
+            <option>Hungary</option>
+            <option>Europe</option>
+            <option>Turkey</option>
+            <option>Finland</option>
+            <option>Czech Republic</option>
+            <option>Poland</option>
+          </select>
+          <select id="fundingFilter" class="filter-select">
+            <option value="">All Funding</option>
+            <option>Fully Funded</option>
+            <option>Partial</option>
+          </select>
+          <select id="fieldFilter" class="filter-select">
+            <option value="">All Fields</option>
+            <option>Computer Science / AI</option>
+            <option>Engineering</option>
+            <option>All Fields</option>
+            <option>Sciences</option>
+          </select>
+          <button class="btn-search" id="searchBtn">Search</button>
+        </div>
+        <div class="active-filters" id="activeFilters"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ API SOURCE TABS ════════════════════════════════════════════ -->
+  <section class="results-section">
+    <div class="container">
+      <div class="results-header">
+        <div class="source-tabs">
+          <button class="tab-btn active" data-source="all">All Sources</button>
+          <button class="tab-btn" data-source="dataps">Data Palestine</button>
+          <button class="tab-btn" data-source="opendata">OpenData.ps</button>
+          <button class="tab-btn" data-source="apify">Apify Scraper</button>
+          <button class="tab-btn" data-source="curated">Curated</button>
+        </div>
+        <div class="results-count" id="resultsCount">Loading…</div>
+      </div>
+
+      <!-- Loading state -->
+      <div class="loading-state" id="loadingState">
+        <div class="loader-ring"></div>
+        <p class="loader-text" id="loaderText">Fetching from Data Palestine API…</p>
+        <div class="loader-sources">
+          <span id="ls-dataps" class="ls-item pending">🗄️ Data Palestine</span>
+          <span id="ls-opendata" class="ls-item pending">📡 OpenData.ps</span>
+          <span id="ls-apify" class="ls-item pending">🤖 Apify</span>
+        </div>
+      </div>
+
+      <!-- Error state -->
+      <div class="error-state hidden" id="errorState">
+        <div class="error-icon">⚠️</div>
+        <h3>Some APIs unavailable</h3>
+        <p>Showing curated data. Live API connections may require CORS proxy or API keys.</p>
+        <button class="btn-primary" id="retryBtn">Retry APIs</button>
+      </div>
+
+      <!-- Scholarships grid -->
+      <div class="cards-grid hidden" id="cardsGrid"></div>
+
+      <!-- Empty -->
+      <div class="empty-state hidden" id="emptyState">
+        <div class="empty-icon">🔍</div>
+        <h3>No results found</h3>
+        <p>Try adjusting your search or filters.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ROADMAP ════════════════════════════════════════════════════ -->
+  <section class="roadmap-section" id="roadmap">
+    <div class="container">
+      <div class="section-head center">
+        <div class="section-label">Step by Step</div>
+        <h2 class="section-title">2026 Application Roadmap</h2>
+        <p class="section-desc">Follow this checklist to maximize your scholarship chances.</p>
+      </div>
+      <div class="roadmap-track">
+        <div class="roadmap-line"></div>
+        <div class="roadmap-steps" id="roadmapSteps"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ AI ADVISOR ════════════════════════════════════════════════ -->
+  <section class="advisor-section" id="advisor">
+    <div class="container">
+      <div class="advisor-panel">
+        <div class="advisor-info">
+          <div class="section-label">Claude-Powered</div>
+          <h2 class="advisor-title">AI Scholarship<br /><em>Advisor</em></h2>
+          <p class="advisor-desc">
+            Ask anything about eligibility, deadlines, no-IELTS options,
+            GPA requirements, or motivation letters. Powered by Claude.
+          </p>
+          <div class="quick-prompts" id="quickPrompts"></div>
+        </div>
+        <div class="advisor-chat">
+          <div class="chat-header">
+            <div class="chat-avatar">✦</div>
+            <div>
+              <div class="chat-name">Scholarship Advisor</div>
+              <div class="chat-status"><span class="status-dot online"></span> Online</div>
+            </div>
+          </div>
+          <div class="chat-messages" id="chatMessages"></div>
+          <div class="chat-input-row">
+            <input type="text" id="chatInput" class="chat-input" placeholder="Ask about scholarships…" />
+            <button class="chat-send" id="chatSend">
+              <span id="sendLabel">Send</span>
+              <span class="send-arrow">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="logo">
+          <div class="pal-flag">
+            <span class="f-black"></span>
+            <span class="f-white"></span>
+            <span class="f-green"></span>
+            <div class="f-triangle"></div>
+          </div>
+          <span>Palestine Scholarship Hub</span>
+        </div>
+        <p>Helping Palestinian students access fully funded opportunities across Europe. Free, always.</p>
+        <div class="footer-api-note">
+          <span>⚡ Powered by:</span>
+          <a href="https://data.palestine.ps" target="_blank">Data Palestine</a>
+          <span>·</span>
+          <a href="https://www.opendata.ps" target="_blank">OpenData.ps</a>
+          <span>·</span>
+          <a href="https://apify.com" target="_blank">Apify</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Scholarships</h4>
+        <ul>
+          <li><a href="https://www.britishcouncil.ps/en/study-uk/scholarships/hespal" target="_blank">HESPAL (UK)</a></li>
+          <li><a href="https://www.daad.de/en/" target="_blank">DAAD Germany</a></li>
+          <li><a href="https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en" target="_blank">Erasmus Mundus</a></li>
+          <li><a href="https://stipendiumhungaricum.hu/" target="_blank">Hungaricum</a></li>
+          <li><a href="https://www.turkiyeburslari.gov.tr/" target="_blank">Turkey Bursları</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="https://www.opendata.ps/" target="_blank">OpenData.ps</a></li>
+          <li><a href="https://data.palestine.ps/" target="_blank">Data Palestine</a></li>
+          <li><a href="https://www.scholars4dev.com/" target="_blank">Scholars4Dev</a></li>
+          <li><a href="https://www.britishcouncil.ps/" target="_blank">British Council PS</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Guides</h4>
+        <ul>
+          <li><a href="#">Motivation Letter</a></li>
+          <li><a href="#">MOI Certificate</a></li>
+          <li><a href="#">No-IELTS Programs</a></li>
+          <li><a href="#">Visa Process</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span>© 2026 Palestine Scholarship Hub</span>
+        <span>Built with ♥ for Palestinian students</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
