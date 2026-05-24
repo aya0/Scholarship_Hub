@@ -1,0 +1,69 @@
+@startuml
+skinparam shadowing false
+skinparam DefaultFontName Arial
+skinparam ArrowColor #555555
+skinparam SequenceLifeLineBorderColor #AAAAAA
+skinparam SequenceBoxBorderColor #AAAAAA
+skinparam SequenceParticipantBorderColor #555555
+skinparam SequenceParticipantBackgroundColor #F5F5F5
+skinparam SequenceGroupBorderColor #888780
+skinparam SequenceGroupBackgroundColor #F1EFE8
+skinparam SequenceDividerBorderColor #888780
+skinparam SequenceDividerBackgroundColor #F1EFE8
+skinparam NoteBackgroundColor #FAEEDA
+skinparam NoteBorderColor #BA7517
+
+title Palestinian Scholarship Hub — Sequence Diagram
+
+actor       User
+participant Frontend
+participant "Auth API"     as Auth
+participant "Scholarship DB" as SchDB
+participant "AI Engine"    as AI
+participant "Notif. Service" as Notif
+participant "Calendar"     as Cal
+
+== Registration & Login ==
+User     ->  Frontend : Submit credentials
+Frontend ->  Auth     : Validate user
+Auth     --> Frontend : Return JWT token
+Frontend --> User     : Load dashboard
+
+== Scholarship Discovery ==
+User     ->  Frontend : Search + filters
+Frontend ->  SchDB    : Query scholarships
+SchDB    --> Frontend : Return results
+Frontend --> User     : Render scholarship list
+User     ->  Frontend : Open scholarship detail
+Frontend ->  SchDB    : Fetch full record
+SchDB    --> Frontend : Full scholarship data
+Frontend --> User     : Display detail (criteria, dates, guide)
+
+== AI Matching Mode ==
+User     ->  Frontend : Activate AI mode
+Frontend ->  AI       : Send user profile
+AI       ->  SchDB    : Fetch all active scholarships
+SchDB    --> AI       : Return scholarship list
+AI       ->  AI       : Score & rank scholarships
+note right of AI : Weighted scoring:\nGPA, language, field,\nexperience, docs
+AI       --> Frontend : Ranked results + match % + gap analysis
+Frontend --> User     : Display personalized list
+
+== Save Scholarship & Calendar ==
+User     ->  Frontend : Bookmark scholarship
+Frontend ->  SchDB    : Save to favorites
+User     ->  Frontend : Add deadline to calendar
+Frontend ->  Cal      : Generate .ics event
+Cal      --> User     : Return calendar file (download)
+
+== Deadline Reminder ==
+SchDB    ->  Notif    : Trigger deadline check (cron job)
+Notif    --> User     : Send email / push notification
+
+== Application Tracking ==
+User     ->  Frontend : Update application status
+Frontend ->  SchDB    : Write application status
+SchDB    --> Frontend : Confirm saved
+Frontend --> User     : Show application tracker
+
+@enduml

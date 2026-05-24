@@ -1,0 +1,51 @@
+@startuml
+skinparam shadowing false
+skinparam DefaultFontName Arial
+skinparam ArrowColor #555555
+skinparam ActivityBorderColor #555555
+skinparam ActivityBackgroundColor #F5F5F5
+skinparam DecisionBorderColor #BA7517
+skinparam DecisionBackgroundColor #FAEEDA
+skinparam ActivityDiamondBorderColor #BA7517
+skinparam ActivityDiamondBackgroundColor #FAEEDA
+skinparam StartColor #444441
+skinparam EndColor #444441
+
+title Palestinian Scholarship Hub — Activity Diagram
+
+start
+
+:Visit platform;
+
+if (Has account?) then (yes)
+  :Log in;
+else (no)
+  :Register account;
+  :Build profile\n(GPA, language, field, docs);
+endif
+
+if (Choose mode?) then (Browse manually)
+  :Search scholarships\n(filter by type, country, deadline);
+  :View scholarship detail\n(criteria, dates, guide);
+else (AI mode)
+  :Activate AI matching engine;
+  :AI scores profile vs all scholarships;
+  :View ranked results\n(match % + gap analysis);
+endif
+
+:Evaluate scholarship\n(read criteria, acceptance rate);
+
+if (Interested?) then (no)
+  :Continue browsing;
+  stop
+else (yes)
+  :Save to favorites;
+  :Add deadline to calendar\n(Google / Apple / .ics);
+  :Set deadline reminder;
+  :Prepare application\n(CV, docs, motivation letter);
+  :Submit application;
+  :Track application status\n(Not started → In progress → Submitted → Result);
+endif
+
+stop
+@enduml

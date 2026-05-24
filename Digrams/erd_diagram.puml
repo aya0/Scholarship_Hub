@@ -1,0 +1,132 @@
+@startuml
+skinparam shadowing false
+skinparam DefaultFontName Arial
+skinparam EntityBorderColor #555555
+skinparam EntityBackgroundColor #F5F5F5
+skinparam EntityFontStyle bold
+skinparam ArrowColor #555555
+skinparam linetype ortho
+
+title Palestinian Scholarship Hub — Entity Relationship Diagram
+
+entity "USER" as USER {
+  * id : uuid <<PK>>
+  --
+  full_name : varchar
+  email : varchar
+  password_hash : varchar
+  role : varchar
+  created_at : timestamp
+}
+
+entity "USER_PROFILE" as PROFILE {
+  * id : uuid <<PK>>
+  --
+  * user_id : uuid <<FK>>
+  gpa : float
+  degree_level : varchar
+  field_of_study : varchar
+  language_cert : varchar
+  language_score : float
+  experience_years : int
+  nationality_doc : varchar
+  financial_status : varchar
+  target_countries : text
+  updated_at : timestamp
+}
+
+entity "SCHOLARSHIP" as SCH {
+  * id : uuid <<PK>>
+  --
+  title : varchar
+  type : varchar
+  country : varchar
+  funder : varchar
+  description : text
+  eligibility : text
+  application_steps : text
+  open_date : date
+  close_date : date
+  degree_levels : varchar
+  fields : varchar
+  language_req : varchar
+  acceptance_rate : float
+  is_active : boolean
+  created_at : timestamp
+}
+
+entity "FAVORITE" as FAV {
+  * id : uuid <<PK>>
+  --
+  * user_id : uuid <<FK>>
+  * scholarship_id : uuid <<FK>>
+  saved_at : timestamp
+}
+
+entity "APPLICATION" as APP {
+  * id : uuid <<PK>>
+  --
+  * user_id : uuid <<FK>>
+  * scholarship_id : uuid <<FK>>
+  status : varchar
+  submitted_at : date
+  notes : text
+  updated_at : timestamp
+}
+
+entity "AI_MATCH" as AI {
+  * id : uuid <<PK>>
+  --
+  * user_id : uuid <<FK>>
+  * scholarship_id : uuid <<FK>>
+  match_score : float
+  gap_analysis : text
+  suggestions : text
+  generated_at : timestamp
+}
+
+entity "NOTIFICATION" as NOTIF {
+  * id : uuid <<PK>>
+  --
+  * user_id : uuid <<FK>>
+  * scholarship_id : uuid <<FK>>
+  type : varchar
+  channel : varchar
+  sent : boolean
+  scheduled_at : timestamp
+  sent_at : timestamp
+}
+
+entity "DOCUMENT" as DOC {
+  * id : uuid <<PK>>
+  --
+  * user_id : uuid <<FK>>
+  doc_type : varchar
+  file_url : varchar
+  uploaded_at : timestamp
+}
+
+entity "SUCCESS_STORY" as STORY {
+  * id : uuid <<PK>>
+  --
+  * user_id : uuid <<FK>>
+  * scholarship_id : uuid <<FK>>
+  story_text : text
+  verified : boolean
+  published_at : timestamp
+}
+
+USER         ||--||  PROFILE  : has
+USER         ||--o{  FAV      : saves
+USER         ||--o{  APP      : submits
+USER         ||--o{  AI       : receives
+USER         ||--o{  NOTIF    : gets
+USER         ||--o{  DOC      : uploads
+USER         ||--o{  STORY    : writes
+SCH          ||--o{  FAV      : in
+SCH          ||--o{  APP      : receives
+SCH          ||--o{  AI       : matched_in
+SCH          ||--o{  NOTIF    : triggers
+SCH          ||--o{  STORY    : about
+
+@enduml
